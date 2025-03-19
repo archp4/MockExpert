@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">MockExpert</string>
+    <string name="app_name">ProjectMX</string>
+    <string name="Forget_Password"><a href="#">Forget Password?</a></string>
+    <string name="Sign_up">New user?<a href="">Register</a></string>
+    <string name="Login">Already have an account?<a href="">Login</a></string>
+    <string name="terms_conditions">I agree to <a href="">terms &amp; conditions.</a></string>
+    <string-array name="test_types">
+        <item>Academic</item>
+        <item>General</item>
+    </string-array>
+    <string-array name="gender_options">
+        <item>Select Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
 </resources>

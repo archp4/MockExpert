@@ -1,0 +1,30 @@
+<!-- res/layout/spinner_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp">
+
+    <!-- ImageView for the drawable icon -->
+    <ImageView
+        android:id="@+id/spinner_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_action_testype"
+    android:layout_gravity="center_vertical" />
+
+    <!-- TextView for the spinner item text -->
+    <TextView
+        android:id="@+id/spinner_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:drawableStart="@drawable/ic_action_testype"
+        android:layout_gravity="center_vertical"
+        android:paddingStart="16dp" />
+</LinearLayout>
