@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+        boolean temp = LoginService.onLogin(email,password, Login.this);
     }
 
     public void openSignUpPage(View view) {
