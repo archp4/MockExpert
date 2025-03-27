@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +39,8 @@ public class Login extends AppCompatActivity {
             return;
         }
 
-        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Login.this, Dashboard.class);
+        startActivity(intent);
     }
 
     public void openSignUpPage(View view) {

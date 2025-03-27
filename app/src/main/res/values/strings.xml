@@ -14,4 +14,6 @@
         <item>Female</item>
         <item>Other</item>
     </string-array>
+    <string name="introductionQuestion">Tell me something about your hometown.</string>
+    <string name="questionNumber">Question 1</string>
 </resources>
