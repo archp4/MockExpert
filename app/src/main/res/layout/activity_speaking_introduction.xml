@@ -78,16 +78,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
-    <ImageButton
-        android:id="@+id/iBtn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/icon_save"
-        app:layout_constraintTop_toBottomOf="@id/btn_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/offWhite"
-        android:onClick="stopRecording"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

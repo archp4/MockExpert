@@ -3,12 +3,11 @@ package com.group7.mockexpert;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.media.MediaScannerConnection;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -43,9 +42,7 @@ public class SpeakingIntroductionActivity extends AppCompatActivity {
 
     private void checkPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.RECORD_AUDIO
-            }, REQUEST_PERMISSIONS);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_PERMISSIONS);
         }
     }
 
@@ -68,8 +65,7 @@ public class SpeakingIntroductionActivity extends AppCompatActivity {
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
-        // Fix file path issue
-        File path = getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         if (path != null) {
             audioFile = new File(path, "introAudio.3gp");
             mediaRecorder.setOutputFile(audioFile.getAbsolutePath());
@@ -99,9 +95,17 @@ public class SpeakingIntroductionActivity extends AppCompatActivity {
         try {
             mediaRecorder.stop();
             mediaRecorder.release();
-            mediaRecorder = null; // Reset the MediaRecorder instance
+            mediaRecorder = null;
 
             isRecording = false;
+            startButton.setText("Start Recording");
+
+            // Refresh Media Storage to show file
+            MediaScannerConnection.scanFile(this,
+                    new String[]{audioFile.getAbsolutePath()},
+                    null,
+                    (path, uri) -> {});
+
             Toast.makeText(this, "Recording saved: " + audioFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             e.printStackTrace();
