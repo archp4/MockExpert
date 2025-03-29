@@ -24,6 +24,12 @@ public class PartSelectionSpeaking extends AppCompatActivity {
             Intent intent = new Intent(this, SpeakingIntroductionActivity.class);
             startActivity(intent);
         });
+
+        CardView cardView2 = findViewById(R.id.cv_part2);
+        cardView2.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CueCards.class);
+            startActivity(intent);
+        });
     }
 //    public void openSpeakingIntroduction(View view) {
 //        Intent intent = new Intent(this, SpeakingIntroductionActivity.class);
