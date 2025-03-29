@@ -17,10 +17,10 @@
         android:theme="@style/Theme.MockExpert"
         tools:targetApi="31">
         <activity
-            android:name=".CueCardDetail"
+            android:name=".SpeakingPart3"
             android:exported="false" />
         <activity
-            android:name=".CueCards"
+            android:name=".CueCard"
             android:exported="false" />
         <activity
             android:name=".SpeakingIntroductionActivity"

@@ -16,4 +16,6 @@
     </string-array>
     <string name="introductionQuestion">Tell me something about your hometown.</string>
     <string name="questionNumber">Question 1</string>
+    <string name="cueCard">Describe a hobby.</string>
+    <string name="discussion">Advantages of internet.</string>
 </resources>

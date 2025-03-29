@@ -19,7 +19,19 @@ public class LevelsPage extends AppCompatActivity {
         setContentView(R.layout.activity_levels_page);
     }
 
-    public void openSpeakingParts(View view) {
+    public void openLevel1(View view) {
+        Intent intent = new Intent(LevelsPage.this, PartSelectionSpeaking.class);
+        startActivity(intent);
+    }
+    public void openLevel2(View view) {
+        Intent intent = new Intent(LevelsPage.this, PartSelectionSpeaking.class);
+        startActivity(intent);
+    }
+    public void openLevel3(View view) {
+        Intent intent = new Intent(LevelsPage.this, PartSelectionSpeaking.class);
+        startActivity(intent);
+    }
+    public void openLevel4(View view) {
         Intent intent = new Intent(LevelsPage.this, PartSelectionSpeaking.class);
         startActivity(intent);
     }

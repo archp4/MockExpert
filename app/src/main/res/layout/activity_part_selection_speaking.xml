@@ -20,7 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center_horizontal"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:textColor="@color/black"/>
 
 
     <androidx.cardview.widget.CardView

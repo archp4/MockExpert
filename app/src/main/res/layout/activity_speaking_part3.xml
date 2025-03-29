@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SpeakingIntroductionActivity"
+    tools:context=".SpeakingPart3"
     android:background="@color/softBlue">
 
     <TextView
@@ -23,10 +23,12 @@
         android:textColor="@color/black"/>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_introduction"
+        android:id="@+id/cv_discussion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         app:cardElevation="24dp"
         app:cardCornerRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,31 +39,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/questionNumber"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:layout_marginTop="20dp"
-        android:gravity="center_horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/tv_introduction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/introductionQuestion"
-        android:textSize="25sp"
-        android:padding="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_question"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+            <TextView
+                android:id="@+id/tv_discussion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/discussion"
+                android:textSize="25sp"
+                android:padding="20dp"
+                android:gravity="left"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,7 +62,7 @@
         android:text="Start"
         android:textSize="30sp"
         android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/cv_introduction"
+        app:layout_constraintTop_toBottomOf="@id/cv_discussion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

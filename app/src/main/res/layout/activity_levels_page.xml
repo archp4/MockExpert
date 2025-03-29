@@ -33,7 +33,7 @@
         android:layout_marginRight="20dp"
         android:backgroundTint="@color/white"
         android:textColor="@color/black"
-        android:onClick="openSpeakingParts"/>
+        android:onClick="openLevel1"/>
 
     <Button
         android:id="@+id/btn_level2"
@@ -48,7 +48,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="@color/white"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:onClick="openLevel2"/>
 
     <Button
         android:id="@+id/btn_level3"
@@ -63,7 +64,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="@color/white"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:onClick="openLevel3"/>
 
     <Button
         android:id="@+id/btn_level4"
@@ -78,6 +80,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="@color/white"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:onClick="openLevel4"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

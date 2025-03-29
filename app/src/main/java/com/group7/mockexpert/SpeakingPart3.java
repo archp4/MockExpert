@@ -7,8 +7,6 @@ import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -22,39 +20,23 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class CueCardDetail extends AppCompatActivity {
-    private TextView titleTextView;
-    private LinearLayout bulletPointsLayout;
+public class SpeakingPart3 extends AppCompatActivity {
+
     private MediaRecorder mediaRecorder;
     private Button startButton;
     private boolean isRecording = false;
     private File audioFile;
+
     private static final int REQUEST_PERMISSIONS = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cue_card_detail);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_speaking_part3);
 
         startButton = findViewById(R.id.btn_start);
-
-        titleTextView = findViewById(R.id.cueCardTitle);
-        bulletPointsLayout = findViewById(R.id.bulletPointsLayout);
-
-        // Get the cue card title and bullet points passed from the previous activity
-        String title = getIntent().getStringExtra("cueCardTitle");
-        ArrayList<String> bulletPoints = getIntent().getStringArrayListExtra("cueCardBulletPoints");
-        titleTextView.setText(title);
-
-        if (bulletPoints != null) {
-            for (String bullet : bulletPoints) {
-                TextView bulletPointTextView = new TextView(this);
-                bulletPointTextView.setText("• " + bullet);  // Adding bullet point symbol
-                bulletPointsLayout.addView(bulletPointTextView);
-            }
-        }
 
         checkPermissions();
 
@@ -88,7 +70,7 @@ public class CueCardDetail extends AppCompatActivity {
 
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         if (path != null) {
-            audioFile = new File(path, "cueCardAudio.3gp");
+            audioFile = new File(path, "introAudio.3gp");
             mediaRecorder.setOutputFile(audioFile.getAbsolutePath());
         } else {
             Toast.makeText(this, "Storage error", Toast.LENGTH_SHORT).show();
