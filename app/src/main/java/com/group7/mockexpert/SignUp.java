@@ -1,5 +1,6 @@
 package com.group7.mockexpert;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,7 +54,7 @@ public class SignUp extends AppCompatActivity {
             DatePickerDialog datePickerDialog = new DatePickerDialog(SignUp.this, (view, selectedYear, selectedMonth, selectedDayOfMonth) -> {
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String formattedDate = sdf.format(selectedDate.getTime());
                 etDOB.setText(formattedDate);
             }, year, month, dayOfMonth);
@@ -119,4 +120,8 @@ public class SignUp extends AppCompatActivity {
     }
 
 
+    public void openLoginPage(View view) {
+        Intent intent = new Intent(SignUp.this, Login.class);
+        startActivity(intent);  // Start Login activity
+    }
 }

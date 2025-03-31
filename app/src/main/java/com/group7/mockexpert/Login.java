@@ -8,7 +8,7 @@ import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements LoginListener {
 
     private EditText etEmail, etPassword;
     private CheckBox checkBoxRememberMe;
@@ -36,11 +36,25 @@ public class Login extends AppCompatActivity {
             etPassword.setError("Password cannot be empty");
             return;
         }
-        boolean temp = LoginService.onLogin(email,password, Login.this);
+        LoginService loginService = new LoginService();
+        loginService.loginListener = this;
+        loginService.onLogin(email,password, Login.this);
+
     }
 
     public void openSignUpPage(View view) {
         Intent intent = new Intent(Login.this, SignUp.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onLoginSuccessful() {
+        Intent intent = new Intent(Login.this, Dashboard.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onLoginError() {
+
     }
 }

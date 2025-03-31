@@ -49,7 +49,6 @@ public class SignUp2 extends AppCompatActivity {
 
         btnRegister.setOnClickListener(v -> {
             if (validateFields()) {
-
                 Toast.makeText(SignUp2.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -96,5 +95,8 @@ public class SignUp2 extends AppCompatActivity {
     private boolean isValidPassword(String password) {
         String passwordPattern = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{6,}$";
         return password.matches(passwordPattern);
+    }
+
+    public void openLoginPage(View view) {
     }
 }

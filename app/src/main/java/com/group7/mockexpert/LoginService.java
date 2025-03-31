@@ -2,7 +2,6 @@ package com.group7.mockexpert;
 
 import android.content.Context;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -11,33 +10,37 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
+
+interface LoginListener{
+    void onLoginSuccessful();
+    void onLoginError();
+}
 
 public class LoginService {
 
-    static boolean isError = false;
-    static boolean onLogin(String username, String password, Context context){
+    LoginListener loginListener;
+
+    void onLogin(String username, String password, Context context){
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://mock-expert-api-git-main-archp4s-projects.vercel.app/auth/login";
+        String url = "https://mock-expert-api.vercel.app/auth/login";
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show();
+                        loginListener.onLoginSuccessful();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        handleVolleyError(error, "Login failed",context);
+                        handleVolleyError(error, context);
+                        loginListener.onLoginError();
                     }
                 }) {
 
@@ -66,19 +69,18 @@ public class LoginService {
 
         queue.add(postRequest);
 
-        return !isError;
+
     }
 
-    private static void handleVolleyError(VolleyError error, String errorMessagePrefix, Context context) {
+    private static void handleVolleyError(VolleyError error, Context context) {
         String message = "";
         if (error.networkResponse != null) {
             int statusCode = error.networkResponse.statusCode;
             String responseData = new String(error.networkResponse.data, StandardCharsets.UTF_8);
-             message =  errorMessagePrefix + ". Status Code: " + statusCode + ". Response: " + responseData;
+             message =  "Login failed" + ". Status Code: " + statusCode + ". Response: " + responseData;
         } else {
-             message = errorMessagePrefix + ". Network error. See Logcat.";
+             message = "Login failed" + ". Network error. See Logcat.";
         }
-        isError = true;
         VolleyLog.e(message);
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
