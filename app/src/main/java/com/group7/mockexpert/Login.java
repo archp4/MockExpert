@@ -36,9 +36,7 @@ public class Login extends AppCompatActivity {
             etPassword.setError("Password cannot be empty");
             return;
         }
-
-        Intent intent = new Intent(Login.this, Dashboard.class);
-        startActivity(intent);
+        boolean temp = LoginService.onLogin(email,password, Login.this);
     }
 
     public void openSignUpPage(View view) {
