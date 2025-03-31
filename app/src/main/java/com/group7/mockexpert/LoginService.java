@@ -26,7 +26,7 @@ public class LoginService {
     void onLogin(String username, String password, Context context){
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://mock-expert-api.vercel.app/auth/login";
+        String url = "https://mock-expert-api.vercel.app/auth/login/";
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
