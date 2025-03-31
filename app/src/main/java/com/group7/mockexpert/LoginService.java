@@ -8,8 +8,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.group7.mockexpert.models.SharedPreferencesManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
@@ -27,12 +30,18 @@ public class LoginService {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "https://mock-expert-api.vercel.app/auth/login/";
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url,null,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show();
-                        loginListener.onLoginSuccessful();
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String token = response.getString("token_type") +" "+ response.getString("access_token");
+                            SharedPreferencesManager.setLogin(token, context);
+                            Toast.makeText(context, token, Toast.LENGTH_SHORT).show();
+                            loginListener.onLoginSuccessful();
+                        } catch (JSONException e) {
+                            loginListener.onLoginError();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -49,7 +58,7 @@ public class LoginService {
             }
 
             @Override
-            public byte[] getBody() throws AuthFailureError {
+            public byte[] getBody() {
 
                 JSONObject params = new JSONObject();
                 try {
@@ -58,8 +67,6 @@ public class LoginService {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
-
                 return params.toString().getBytes(StandardCharsets.UTF_8);
             }
         };
