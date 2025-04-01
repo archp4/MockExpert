@@ -1,10 +1,13 @@
 package com.group7.mockexpert;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ import android.media.MediaScannerConnection;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -36,6 +40,8 @@ public class SpeakingIntroductionActivity extends AppCompatActivity implements S
     private List<String> questions;
     private int index = 0;
     private static final int REQUEST_PERMISSIONS = 200;
+    private static final int PICK_AUDIO_REQUEST_CODE = 101;
+    private static final int SPEECH_REQUEST_CODE = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,13 +124,17 @@ public class SpeakingIntroductionActivity extends AppCompatActivity implements S
             {
                 updatedQuestion();
             }
-            // Refresh Media Storage to show file
+            else
+            {
+                Toast.makeText(this,"End of Session",Toast.LENGTH_SHORT).show();
+                startButton.setEnabled(false);
+            }
+
             MediaScannerConnection.scanFile(this,
                     new String[]{audioFile.getAbsolutePath()},
                     null,
                     (path, uri) -> {});
-
-            Toast.makeText(this, "Recording saved: " + audioFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+            convertSpeechToText(audioFile.getAbsolutePath());
         } catch (Exception e) {
             e.getMessage();
             Toast.makeText(this, "Failed to stop recording", Toast.LENGTH_SHORT).show();
@@ -140,6 +150,27 @@ public class SpeakingIntroductionActivity extends AppCompatActivity implements S
             } else {
                 Toast.makeText(this, "Permissions denied", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            String spokenText = (results != null && !results.isEmpty()) ? results.get(0) : "No speech detected";
+            Toast.makeText(this,spokenText,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void convertSpeechToText(String audioURL) {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_AUDIO_SOURCE, audioURL);
+        try {
+            startActivityForResult(intent, SPEECH_REQUEST_CODE);
+        } catch (Exception e) {
+            Toast.makeText(SpeakingIntroductionActivity.this,"Speech recognition not supported on this device",Toast.LENGTH_SHORT).show();
         }
     }
 
