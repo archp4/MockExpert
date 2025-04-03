@@ -2,10 +2,10 @@ package com.group7.mockexpert;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import com.group7.mockexpert.api_helpers.APIConnectionService;
 
 public class PartSelectionSpeaking extends AppCompatActivity {
 
@@ -17,6 +17,7 @@ public class PartSelectionSpeaking extends AppCompatActivity {
 
         CardView cardView = findViewById(R.id.cv_part1);
         cardView.setOnClickListener(v -> {
+            //APIConnectionService.TestConnection("http://10.0.0.102:8000/", this);
             Intent intent = new Intent(this, SpeakingIntroductionActivity.class);
             startActivity(intent);
         });
