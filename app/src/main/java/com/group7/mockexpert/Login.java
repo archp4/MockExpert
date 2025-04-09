@@ -42,12 +42,12 @@ public class Login extends AppCompatActivity implements LoginListener {
         String password = etPassword.getText().toString().trim();
 
         if (email.isEmpty()){
-            etEmail.setError("Email cannot be empty");
+            Toast.makeText(this, "Email is required.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (password.isEmpty()){
-            etPassword.setError("Password cannot be empty");
+            Toast.makeText(this, "Password is required.", Toast.LENGTH_SHORT).show();
             return;
         }
         LoginService loginService = new LoginService();
