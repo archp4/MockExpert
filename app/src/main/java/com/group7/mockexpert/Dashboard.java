@@ -30,6 +30,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void openWritingModule(View view) {
-
+        Intent intent = new Intent(Dashboard.this, PartSelectionWriting.class);
+        startActivity(intent);
     }
 }
