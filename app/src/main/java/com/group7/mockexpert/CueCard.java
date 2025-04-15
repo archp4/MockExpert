@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat;
 import java.io.File;
 import java.io.IOException;
 
-public class CueCard extends AppCompatActivity {
+public class  CueCard extends AppCompatActivity {
     private MediaRecorder mediaRecorder;
     private Button startButton;
     private boolean isRecording = false;

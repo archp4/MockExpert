@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.group7.mockexpert.models.SharedPreferencesManager;
+
 public class Login extends AppCompatActivity implements LoginListener {
 
     private EditText etEmail, etPassword;
@@ -19,9 +21,19 @@ public class Login extends AppCompatActivity implements LoginListener {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-
         etEmail = findViewById(R.id.et_email1);
         etPassword = findViewById(R.id.et_pwd1);
+        validateLoginSession();
+    }
+
+    private void validateLoginSession(){
+        boolean temp = SharedPreferencesManager.validateLogin(this);
+        if (temp)
+        {
+            Toast.makeText(this,"LoggedIn",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Dashboard.class);
+            startActivity(intent);
+        }
     }
 
     public void btn_login(View view) {
