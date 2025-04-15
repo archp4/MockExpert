@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WritingPieChart"
+    android:background="@color/softBlue">
+
+    <TextView
+        android:id="@+id/tv_writingPractice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Writing Practice"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cv_questionPieChart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/black"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_questionPieChart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="24dp"
+        app:cardCornerRadius="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_writingPractice">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_questionPieChart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/piechartQuestion"
+                android:textSize="25sp"
+                android:padding="20dp"
+                android:gravity="left"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <ImageView
+                android:id="@+id/iv_PieChart"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/writing_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_questionPieChart"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_answerPC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cv_questionPieChart"
+        android:orientation="vertical"
+        android:layout_margin="30dp">
+
+        <EditText
+            android:id="@+id/et_answerPieChart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:hint="Type your answer here..."
+            android:padding="20dp"
+            android:gravity="left"
+            android:textSize="20sp"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
+            android:inputType="textMultiLine"
+            android:scrollbarStyle="insideInset"/>
+
+        <TextView
+            android:id="@+id/tv_wordCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Word Count:"
+            android:textSize="20dp"
+            android:gravity="right"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_submitPieChart"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_answerPC"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="btnSubmit"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
