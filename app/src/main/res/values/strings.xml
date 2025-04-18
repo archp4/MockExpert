@@ -18,4 +18,5 @@
     <string name="questionNumber">Question 1</string>
     <string name="cueCard">Describe a hobby.</string>
     <string name="discussion">Advantages of internet.</string>
+    <string name="start_recording">Start Recording</string>
 </resources>
