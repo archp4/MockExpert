@@ -25,6 +25,13 @@ public class SharedPreferencesManager {
         return sp.getString(loginKey,"");
     }
 
+    public static boolean logout(Context context){
+        SharedPreferences sp = context.getSharedPreferences(spKey,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        return editor.commit();
+    }
+
 
 }
 
