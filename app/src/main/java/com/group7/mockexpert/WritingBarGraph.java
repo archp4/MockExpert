@@ -2,20 +2,25 @@ package com.group7.mockexpert;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.bumptech.glide.Glide;
+import com.group7.mockexpert.api_helpers.QuestionApiService;
 
 public class WritingBarGraph extends AppCompatActivity {
 
     EditText etAnswer;
+    TextView tvQuestion;
+    ImageView ivChart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,18 +28,31 @@ public class WritingBarGraph extends AppCompatActivity {
         setContentView(R.layout.activity_writing_bar_graph);
 
         etAnswer = findViewById(R.id.et_answerBarGraph);
+        tvQuestion = findViewById(R.id.tv_questionBarGraph);
+        ivChart = findViewById(R.id.iv_barGraph);
 
+        QuestionApiService.fetchQuestion(this, 1, new QuestionApiService.QuestionCallback() {
+            @Override
+            public void onSuccess(String question, String imageUrl) {
+                tvQuestion.setText(question);
+                Glide.with(WritingBarGraph.this).load(imageUrl).into(ivChart);
+            }
+
+            @Override
+            public void onError(String message) {
+                Log.d("Error",message);
+                Toast.makeText(WritingBarGraph.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void btnSubmit(View view) {
-
         String answer = etAnswer.getText().toString();
-        if (answer.isEmpty()){
+        if (answer.isEmpty()) {
             Toast.makeText(this, "Please write your answer.", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(this, "Answer Submitted.", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, WritingTask1.class);
-            startActivity(intent);
+            startActivity(new Intent(this, WritingTask1.class));
         }
     }
 }
