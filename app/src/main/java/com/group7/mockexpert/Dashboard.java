@@ -17,7 +17,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void openSpeakingModule(View view) {
-        Intent intent = new Intent(Dashboard.this, LevelsPage.class);
+        Intent intent = new Intent(Dashboard.this, PartSelectionSpeaking.class);
         startActivity(intent);
     }
 

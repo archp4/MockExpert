@@ -32,6 +32,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.group7.mockexpert.api_helpers.SpeakingAPIListener;
+import com.group7.mockexpert.api_helpers.SpeakingCompleteListener;
 import com.group7.mockexpert.api_helpers.SpeakingService;
 import com.group7.mockexpert.models.SpeakingQuestion;
 
@@ -42,20 +43,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SpeakingIntroductionActivity extends AppCompatActivity implements SpeakingAPIListener {
+public class SpeakingIntroductionActivity extends AppCompatActivity implements SpeakingAPIListener, SpeakingCompleteListener {
 
     private MediaRecorder mediaRecorder;
     private Button startButton;
     private boolean isRecording = false;
     private File audioFile;
     private TextView textView;
+    private TextView indexView;
     private List<String> questions;
     private int index = 0;
     private static final int REQUEST_PERMISSIONS = 200;
     private static final int SPEECH_REQUEST_CODE = 102;
 
-    private boolean permissionToRecordAccepted = false;
-    private String [] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private final String [] permissions = {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private Map<String,File> audioFiles = new HashMap<String,File>();
     SpeakingService service;
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -67,26 +68,30 @@ public class SpeakingIntroductionActivity extends AppCompatActivity implements S
         setContentView(R.layout.activity_speaking_introduction);
         startButton = findViewById(R.id.btn_start);
         textView = findViewById(R.id.tv_introduction);
-        if (!checkPermissions())
-        {
+        indexView = findViewById(R.id.tv_question);
+        if (!checkPermissions()) {
             requestPermissions();
         }
         startButton.setOnClickListener(v -> toggleRecording());
-        service = new SpeakingService(this);
-        requestAPI();
+        service = new SpeakingService(this,this);
+        questions = service.requestSpeakingIntro().getQuestions();
+        updatedQuestion();
     }
 
     private void requestAPI(){
-        Log.e("Log","API Requested");
+        Log.e("WebSocket","API Requested");
+        service.uploadViaWebSocket(this, audioFiles, questions);
+    }
 
-        service.requestSpeakingPartOne(this);
+    private void completedAPI(){
+        Log.d("Test Completed","Total Question Answer:" + (index+1));
+        service.uploadCompleteMockViaWebSocket(this, audioFiles, questions);
     }
     private void checkPermissions1() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_PERMISSIONS);
         }
     }
-
 
     private void requestPermissions() {
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION);
@@ -95,8 +100,6 @@ public class SpeakingIntroductionActivity extends AppCompatActivity implements S
     private boolean checkPermissions(){
         return ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
-
-
     private void toggleRecording() {
         if (isRecording) {
             stopRecording();
@@ -148,25 +151,25 @@ public class SpeakingIntroductionActivity extends AppCompatActivity implements S
             mediaRecorder.release();
             mediaRecorder = null;
             isRecording = false;
-            startButton.setText("Start Recording");
-
-            if (questions.toArray().length > index)
-            {
-                updatedQuestion();
-            }
-            else
-            {
-                Toast.makeText(this,"End of Session",Toast.LENGTH_SHORT).show();
-                startButton.setEnabled(false);
-                service.requestUpload(this,audioFiles);
-            }
-
+            startButton.setText(R.string.start_recording);
             MediaScannerConnection.scanFile(this,
                     new String[]{audioFile.getAbsolutePath()},
                     null,
                     (path, uri) -> {});
             audioFiles.put(audioFile.getName(),new File(audioFile.getAbsolutePath()));
-            // convertSpeechToText(audioFile.getAbsolutePath());
+
+            if (questions.toArray().length > index)
+            {
+                updatedQuestion();
+            } else if (index == 3) {
+                requestAPI();
+                textView.setText("Please Wait\nwe are processing you response.");
+            } else
+            {
+                textView.setText("End of Session\nPlease Wait\nwe are processing you response.");
+//                startButton.setEnabled(false);
+                completedAPI();
+            }
         } catch (Exception e) {
             e.getMessage();
             Toast.makeText(this, "Failed to stop recording", Toast.LENGTH_SHORT).show();
@@ -198,22 +201,28 @@ public class SpeakingIntroductionActivity extends AppCompatActivity implements S
 
     @Override
     public void onReceive(SpeakingQuestion question) {
-//        questions = question.getQuestions();
-        ArrayList<String> temp = new ArrayList<String>();
-        temp.add("Temp Question 1");
-        temp.add("Temp Question 2");
-        questions = temp;
+        Log.d("onReceive",question.toString());
+        questions.addAll(question.getQuestions());
         updatedQuestion();
     }
 
     private void updatedQuestion(){
         textView.setText(questions.get(index));
         index++;
+        indexView.setText(String.format("Question %d", index));
+    }
+
+    @Override
+    public void onTestResult(String overall, String feedback) {
+        indexView.setText("Band : " + overall);
+        textView.setText("Feedback :\n"+ feedback);
+        textView.setTextSize(14);
+        startButton.setEnabled(false);
     }
 
     @Override
     public void onError(String errorMessage) {
-        Toast.makeText(this,errorMessage,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"errorMessage",Toast.LENGTH_SHORT).show();
     }
 
     @Override

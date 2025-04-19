@@ -10,22 +10,28 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class VolleyMultipartRequest extends Request<NetworkResponse> {
     private final Map<String, String> headers;
     private final Map<String, File> files;
+    private final List<String> questions;
+
+
     private final Response.Listener<NetworkResponse> listener;
     private final String boundary = "apiclient-" + System.currentTimeMillis();
 
     public VolleyMultipartRequest(int method, String url, Map<String, File> files,
                                   Map<String, String> headers,
+                                  List<String> questions,
                                   Response.Listener<NetworkResponse> listener,
                                   Response.ErrorListener errorListener) {
         super(method, url, errorListener);
         this.files = files;
         this.headers = headers;
         this.listener = listener;
+        this.questions = questions;
     }
 
     @Override
@@ -45,7 +51,12 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
         try {
             if (files != null) {
                 for (Map.Entry<String, File> entry : files.entrySet()) {
-                    buildPart(dos, entry.getValue());
+                    buildFilePart(dos, entry.getValue());
+                }
+            }
+            if (questions != null) {
+                for (String value : questions) {
+                    buildStringPart(dos, "questions", value);
                 }
             }
             dos.writeBytes("--" + boundary + "--\r\n");
@@ -56,11 +67,11 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
         return bos.toByteArray();
     }
 
-    private void buildPart(DataOutputStream dos, File file) throws IOException {
+    private void buildFilePart(DataOutputStream dos, File file) throws IOException {
         String fileName = file.getName();
         dos.writeBytes("--" + boundary + "\r\n");
-        dos.writeBytes("Content-Disposition: form-data; name=\"files\"; filename=\"" + fileName + "\"\r\n"); // Correct field name
-        dos.writeBytes("Content-Type: audio/mpeg\r\n\r\n"); // Ensure correct content type
+        dos.writeBytes("Content-Disposition: form-data; name=\"files\"; filename=\"" + fileName + "\"\r\n");
+        dos.writeBytes("Content-Type: audio/mpeg\r\n\r\n");
 
         FileInputStream fis = new FileInputStream(file);
         byte[] buffer = new byte[1024];
@@ -70,6 +81,12 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
         }
         fis.close();
         dos.writeBytes("\r\n");
+    }
+
+    private void buildStringPart(DataOutputStream dos, String paramName, String value) throws IOException {
+        dos.writeBytes("--" + boundary + "\r\n");
+        dos.writeBytes("Content-Disposition: form-data; name=\"" + paramName + "\"\r\n\r\n");
+        dos.writeBytes(value + "\r\n");
     }
 
     @Override
