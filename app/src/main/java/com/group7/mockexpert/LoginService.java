@@ -26,7 +26,7 @@ public class LoginService {
 
     LoginListener loginListener;
 
-    void onLogin(String username, String password, Context context){
+    void onLogin(String username, String password,Boolean isSave, Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "https://mock-expert-api.vercel.app/auth/login/";
 
@@ -36,8 +36,10 @@ public class LoginService {
                     public void onResponse(JSONObject response) {
                         try {
                             String token = response.getString("token_type") +" "+ response.getString("access_token");
-                            SharedPreferencesManager.setLogin(token, context);
-                            Toast.makeText(context, token, Toast.LENGTH_SHORT).show();
+                            if (isSave) {
+                                SharedPreferencesManager.setLogin(token, context);
+                            }
+//                            Toast.makeText(context, token, Toast.LENGTH_SHORT).show();
                             loginListener.onLoginSuccessful();
                         } catch (JSONException e) {
                             loginListener.onLoginError();
