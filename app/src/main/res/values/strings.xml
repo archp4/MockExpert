@@ -19,4 +19,7 @@
     <string name="cueCard">Describe a hobby.</string>
     <string name="discussion">Advantages of internet.</string>
     <string name="start_recording">Start Recording</string>
+    <string name="stop_recording">Stop Recording</string>
+    <string name="loading_question">Loading Question</string>
+    <string name="wait_for_question">Wait for Question</string>
 </resources>

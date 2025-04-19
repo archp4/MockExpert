@@ -131,35 +131,39 @@ public class SpeakingService {
         queue.add(request);
     }
 
-    public void requestUpload(Context context,Map<String,File> audioFiles, List<String> questions){
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-
-        VolleyMultipartRequest request = new VolleyMultipartRequest(
-                Request.Method.POST,
-                "http://10.0.0.102:8000/uploadIntro",
-                audioFiles,
+    public void requestSpeakingPartThree(Context context){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = mainURL + "3/";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url,
                 null,
-                questions,
-                new Response.Listener<NetworkResponse>() {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(NetworkResponse response) {
-                        Log.d("Upload", "Success: " + new String(response.data));
-                        Log.d("Converted List of Questions",parseStringListFromNetworkResponse(response).toString());
-                        SpeakingQuestion question = new SpeakingQuestion();
-                        question.setQuestions(parseStringListFromNetworkResponse(response));
-                        question.setQuestionPart(1);
-                        listener.onReceive(question);
+                    public void onResponse(JSONObject response) {
+                        try{
+                            int questionPart = response.getInt("QuestionPart");
+                            JSONArray questionsArray = response.getJSONArray("questions");
+                            List<String> questions = new ArrayList<String>();
+                            for (int i = 0; i < questionsArray.length(); i++) {
+                                String question = questionsArray.getString(i);
+                                questions.add(question);
+                            }
+                            SpeakingQuestion speakingQuestion = new SpeakingQuestion();
+                            speakingQuestion.setQuestionPart(questionPart);
+                            speakingQuestion.setQuestions(questions);
+                            listener.onReceive(speakingQuestion);
+                        } catch (Exception e){
+                            listener.onError(e.getMessage());
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Upload", "Error: " + error.getMessage());
-                        listener.onError("Error: " + error.getMessage());
+                        listener.onError(error.getMessage());
                     }
                 }
         );
-        requestQueue.add(request);
+        queue.add(request);
     }
 
 

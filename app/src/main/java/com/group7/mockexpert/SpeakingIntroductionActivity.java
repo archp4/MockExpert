@@ -100,8 +100,6 @@ public class SpeakingIntroductionActivity extends AppCompatActivity implements S
     private boolean checkPermissions(){
         return ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
-
-
     private void toggleRecording() {
         if (isRecording) {
             stopRecording();
