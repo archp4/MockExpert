@@ -22,7 +22,7 @@
         android:background="@color/deepBlue"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/gl_h30"/>
-    <Button
+    <!-- <Button
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"/> -->
     <ImageView
         android:id="@+id/imageLOGO"
         android:layout_width="200dp"
@@ -46,7 +46,6 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 
-    <!-- The new rectangle starting at the 30% guideline and ending at the parent -->
     <View
         android:id="@+id/view_bottom"
         android:layout_width="match_parent"
@@ -56,17 +55,21 @@
         app:layout_constraintTop_toTopOf="@id/gl_h30"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <!-- LinearLayout starts and ends with view_bottom -->
     <LinearLayout
         android:id="@+id/linear_layout1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        app:layout_constraintTop_toTopOf="@id/view_bottom">  <!-- Align top with view_bottom -->> <!-- Ensure no additional margin -->
+        app:layout_constraintTop_toTopOf="@id/view_bottom">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
         <TextView
-            android:id="@+id/tv_login"
+            android:id="@+id/tv_signUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign Up"
@@ -74,7 +77,10 @@
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-black"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_username"
@@ -88,7 +94,10 @@
             android:paddingStart="20dp"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
-            android:drawablePadding="20dp"/>
+            android:drawablePadding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signUp"/>
 
         <EditText
             android:id="@+id/et_pwd"
@@ -102,7 +111,11 @@
             android:paddingStart="20dp"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
-            android:drawablePadding="20dp"/>
+            android:drawablePadding="20dp"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_username"/>
 
         <EditText
             android:id="@+id/et_confirmPwd"
@@ -116,22 +129,11 @@
             android:paddingStart="20dp"
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
-            android:drawablePadding="20dp"/>
-
-        <Spinner
-            android:id="@+id/spinner_testypes"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edittext_border"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp"
-            android:spinnerMode="dropdown"
-            android:paddingRight="30dp"
-            android:hint="Select Test Type" />
+            android:drawablePadding="20dp"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_pwd"/>
 
 
         <CheckBox
@@ -139,7 +141,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/terms_conditions"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_confirmPwd"/>
 
 
         <Button
@@ -149,20 +154,29 @@
             android:text="Register"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="@color/green"/>
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/green"
+            android:onClick="openDashboard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/check_box1"/>
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_signup"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center_horizontal"-->
-<!--            android:layout_marginTop="100dp"-->
-<!--            android:text="@string/Login"-->
-<!--            android:onClick="openLoginPage"-->
-<!--            android:clickable="true"-->
-<!--            android:textSize="18sp"-->
-<!--            />-->
+        <TextView
+          android:id="@+id/tv_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:gravity="center_horizontal"
+            android:text="@string/Login"
+            android:onClick="openLoginPage"
+            android:clickable="true"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_Register"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

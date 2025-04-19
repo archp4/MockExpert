@@ -22,4 +22,9 @@
     <string name="stop_recording">Stop Recording</string>
     <string name="loading_question">Loading Question</string>
     <string name="wait_for_question">Wait for Question</string>
+    <string name="barGraphQuestion">Question...</string>
+    <string name="lineChartQuestion">Question...</string>
+    <string name="piechartQuestion">Question...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

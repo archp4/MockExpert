@@ -5,18 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PartSelectionSpeaking"
+    tools:context=".WritingTask1"
     android:background="@color/softBlue">
 
     <TextView
-        android:id="@+id/tv_speakingPractice"
+        android:id="@+id/tv_writingPractice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Speaking Practice"
+        android:text="Writing Practice"
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cv_part1"
+        app:layout_constraintBottom_toTopOf="@id/cv_lineChart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center_horizontal"
@@ -25,15 +25,18 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_part1"
+        android:id="@+id/cv_lineChart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:cardElevation="24dp"
         app:cardCornerRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_speakingPractice"
+        app:layout_constraintTop_toBottomOf="@id/tv_writingPractice"
+        app:layout_constraintBottom_toTopOf="@id/cv_barGraph"
+        android:onClick="openLineChart"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,172 +44,132 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_speakingpart1"
+                android:id="@+id/iv_lineChart"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:src="@drawable/speaking_icon"
+                android:src="@drawable/writing_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
             <TextView
-                android:id="@+id/tv_speakingPart1"
+                android:id="@+id/tv_lineChart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Part 1"
+                android:text="Line Chart"
                 android:textSize="25sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <TextView
-                android:id="@+id/tv_introduction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Introduction"
-                android:textSize="25sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_speakingPart1"
-                app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_part2"
+        android:id="@+id/cv_barGraph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:cardElevation="24dp"
         app:cardCornerRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_part1">
+        app:layout_constraintTop_toBottomOf="@id/cv_lineChart"
+        app:layout_constraintBottom_toTopOf="@id/cv_pieChart"
+        android:onClick="openBarGraph">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_speakingpart2"
+                android:id="@+id/iv_barGraph"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:src="@drawable/speaking_icon"
+                android:src="@drawable/writing_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_speakingPart2"
+                android:id="@+id/tv_barGraph"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Part 2"
+                android:text="Bar Graph"
                 android:textSize="25sp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="50dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:layout_marginTop="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <TextView
-                android:id="@+id/tv_cueCards"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cue Cards"
-                android:textSize="25sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_speakingPart2"
-                app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_part3"
+        android:id="@+id/cv_pieChart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="120dp"
         app:cardElevation="24dp"
         app:cardCornerRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_part2">
+        app:layout_constraintTop_toBottomOf="@id/cv_barGraph"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="openPieChart">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_speakingpart3"
+                android:id="@+id/iv_pieChart"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:src="@drawable/speaking_icon"
+                android:src="@drawable/writing_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_speakingPart3"
+                android:id="@+id/tv_pieChart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Part 3"
+                android:text="Pie Chart"
                 android:textSize="25sp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="50dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:layout_marginTop="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <TextView
-                android:id="@+id/tv_discussion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Discussion"
-                android:textSize="25sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_speakingPart3"
-                app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_part4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="24dp"
-        app:cardElevation="24dp"
-        app:cardCornerRadius="24dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_part3"
-        app:layout_constraintBottom_toBottomOf="parent">
-
 
     </androidx.cardview.widget.CardView>
 

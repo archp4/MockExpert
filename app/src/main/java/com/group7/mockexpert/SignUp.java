@@ -15,8 +15,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class SignUp extends AppCompatActivity {
 
@@ -39,27 +43,25 @@ public class SignUp extends AppCompatActivity {
 
     public void openNextPage(View view) {
         if (validateFields()) {
-            Intent intent = new Intent(SignUp.this, SignUp2.class);
-            startActivity(intent);  // Start Signup2 activity
+            Intent intent = new Intent(this, SignUp2.class);
+            startActivity(intent);
         }
     }
 
     private void setupDateOfBirthPicker() {
         etDOB.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+            MaterialDatePicker<Long> materialDatePicker = MaterialDatePicker.Builder.datePicker()
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds()) // Set default to today
+                    .build();
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(SignUp.this, (view, selectedYear, selectedMonth, selectedDayOfMonth) -> {
-                Calendar selectedDate = Calendar.getInstance();
-                selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth);
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String formattedDate = sdf.format(selectedDate.getTime());
+            materialDatePicker.addOnPositiveButtonClickListener(selection -> {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                String formattedDate = sdf.format(new Date(selection));
                 etDOB.setText(formattedDate);
-            }, year, month, dayOfMonth);
+            });
 
-            datePickerDialog.show();
+            // Show the date picker dialog
+            materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
         });
     }
 
@@ -67,47 +69,34 @@ public class SignUp extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.gender_options, R.layout.spinner_dropdown_item_gender);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item_gender);
         spinnerGender.setAdapter(adapter);
-        spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                String selectedGender = parentView.getItemAtPosition(position).toString();
-                if (!selectedGender.equals("Select Gender")) {
-                    Toast.makeText(SignUp.this, "Selected Gender: " + selectedGender, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {}
-        });
     }
 
     private boolean validateFields() {
         String fullName = etFullname.getText().toString().trim();
         String email = etEmail.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
-        String dob = etDOB.getText().toString().trim();
 
         if (fullName.isEmpty()) {
-            etFullname.setError("Full name is required!");
+            Toast.makeText(this, "Full name is required.", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (email.isEmpty()) {
-            etEmail.setError("Email is required!");
+            Toast.makeText(this, "Email is required.", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if(!isValidateEmail(email)){
-            etEmail.setError("Email is not in valid format");
+            Toast.makeText(this, "Email is not in valid format.", Toast.LENGTH_SHORT).show();
         }
 
         if (phone.isEmpty()) {
-            etPhone.setError("Phone number is required!");
+            Toast.makeText(this, "Phone number is required.", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (phone.length() < 10) {
-            etPhone.setError("Phone number must have 10 numbers!");
+            Toast.makeText(this, "Phone number must have 10 digits.", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -121,7 +110,9 @@ public class SignUp extends AppCompatActivity {
 
 
     public void openLoginPage(View view) {
-        Intent intent = new Intent(SignUp.this, Login.class);
-        startActivity(intent);  // Start Login activity
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 }
+
+

@@ -29,7 +29,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class CueCard extends AppCompatActivity implements SpeakingCompleteListener, SpeakingAPIListener {
+
     private MediaRecorder mediaRecorder;
     private Button startButton;
     private boolean isRecording = false;
