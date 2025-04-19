@@ -22,7 +22,7 @@ public class WritingAdvantageDisadvantageEssay extends AppCompatActivity {
         setContentView(R.layout.activity_advantage_disadvantage_essay);
 
         etAnswer = findViewById(R.id.et_AdvantageDisadvantage);
-        tvQuestion = findViewById(R.id.tv_writingPractice);
+        tvQuestion = findViewById(R.id.tv_AdvantageDisadvantage);
 
         QuestionTaskTwoService.fetchQuestion(this, 2, new QuestionTaskTwoService.QuestionCallback() {
             @Override

@@ -22,7 +22,7 @@ public class WritingProblemSolutionEssay extends AppCompatActivity {
         setContentView(R.layout.activity_problem_solution_essay);
 
         etAnswer = findViewById(R.id.et_answerProblemSolution);
-        tvQuestion = findViewById(R.id.tv_writingPractice);
+        tvQuestion = findViewById(R.id.tv_questionProblemSolution);
 
         QuestionTaskTwoService.fetchQuestion(this, 1, new QuestionTaskTwoService.QuestionCallback() {
             @Override
