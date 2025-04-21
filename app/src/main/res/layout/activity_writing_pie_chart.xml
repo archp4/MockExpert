@@ -74,7 +74,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cv_questionPieChart"
         android:orientation="vertical"
-        android:layout_margin="30dp">
+        android:layout_margin="30dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_submitPieChart">
 
         <EditText
             android:id="@+id/et_answerPieChart"
@@ -111,7 +112,8 @@
         app:layout_constraintTop_toBottomOf="@id/linearLayout_answerPC"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="btnSubmit"/>
+        android:onClick="btnSubmit"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
