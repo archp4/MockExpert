@@ -2,11 +2,12 @@ package com.group7.mockexpert;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group7.mockexpert.api_helpers.QuestionTaskTwoService;
@@ -14,7 +15,7 @@ import com.group7.mockexpert.api_helpers.QuestionTaskTwoService;
 public class WritingAdvantageDisadvantageEssay extends AppCompatActivity {
 
     EditText etAnswer;
-    TextView tvQuestion;
+    TextView tvQuestion, tvWordCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class WritingAdvantageDisadvantageEssay extends AppCompatActivity {
 
         etAnswer = findViewById(R.id.et_AdvantageDisadvantage);
         tvQuestion = findViewById(R.id.tv_AdvantageDisadvantage);
+        tvWordCount = findViewById(R.id.tv_wordCount);
 
         QuestionTaskTwoService.fetchQuestion(this, 2, new QuestionTaskTwoService.QuestionCallback() {
             @Override
@@ -35,6 +37,19 @@ public class WritingAdvantageDisadvantageEssay extends AppCompatActivity {
                 Toast.makeText(WritingAdvantageDisadvantageEssay.this, message, Toast.LENGTH_LONG).show();
             }
         });
+
+        etAnswer.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvWordCount.setText("Word Count: " + getWordCount(s.toString()));
+            }
+            public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    private int getWordCount(String text) {
+        if (text.trim().isEmpty()) return 0;
+        return text.trim().split("\\s+").length;
     }
 
     public void btnSubmit(View view) {

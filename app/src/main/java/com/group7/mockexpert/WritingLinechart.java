@@ -2,13 +2,14 @@ package com.group7.mockexpert;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -17,18 +18,18 @@ import com.group7.mockexpert.api_helpers.QuestionApiService;
 public class WritingLinechart extends AppCompatActivity {
 
     EditText etAnswer;
-    TextView tvQuestion;
+    TextView tvQuestion, tvWordCount;
     ImageView ivChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_writing_line_chart);
 
         etAnswer = findViewById(R.id.et_answerLineChart);
         tvQuestion = findViewById(R.id.tv_questionLineChart);
         ivChart = findViewById(R.id.iv_lineChart);
+        tvWordCount = findViewById(R.id.tv_wordCount);
 
         QuestionApiService.fetchQuestion(this, 0, new QuestionApiService.QuestionCallback() {
             @Override
@@ -39,9 +40,22 @@ public class WritingLinechart extends AppCompatActivity {
 
             @Override
             public void onError(String message) {
-                Toast.makeText(WritingLinechart.this, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WritingLinechart.this, message, Toast.LENGTH_LONG).show();
             }
         });
+
+        etAnswer.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tvWordCount.setText("Word Count: " + getWordCount(s.toString()));
+            }
+            public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    private int getWordCount(String text) {
+        if (text.trim().isEmpty()) return 0;
+        return text.trim().split("\\s+").length;
     }
 
     public void btnSubmit(View view) {
