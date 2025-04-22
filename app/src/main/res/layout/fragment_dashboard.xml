@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/softBlue"
+    tools:context=".DashboardFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_v50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_h50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="366dp" />
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_speaking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gl_v50"
+        app:layout_constraintBottom_toTopOf="@id/gl_h50"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="120dp"
+        android:onClick="openSpeakingModule"
+        app:cardCornerRadius="20dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Image -->
+            <ImageView
+                android:id="@+id/iv_speaking"
+                android:layout_width="170dp"
+                android:layout_height="130dp"
+                android:src="@drawable/speaking_icon"
+                android:scaleType="center" />
+
+            <!-- Text -->
+            <TextView
+                android:id="@+id/tv_speaking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Speaking"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="30dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_writing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/gl_v50"
+        app:layout_constraintBottom_toTopOf="@id/gl_h50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="120dp"
+        android:onClick="openWritingModule"
+        app:cardCornerRadius="20dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Image -->
+            <ImageView
+                android:id="@+id/iv_writing"
+                android:layout_width="170dp"
+                android:layout_height="130dp"
+                android:src="@drawable/writing_icon"
+                android:scaleType="center" />
+
+            <!-- Text -->
+            <TextView
+                android:id="@+id/tv_writing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Writing"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="30dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_reading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gl_v50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_h50"
+        android:layout_marginBottom="170dp"
+        android:onClick="openReadingModule"
+        app:cardCornerRadius="20dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Image -->
+            <ImageView
+                android:id="@+id/iv_reading"
+                android:layout_width="170dp"
+                android:layout_height="130dp"
+                android:src="@drawable/reading_icon"
+                android:scaleType="center" />
+
+            <!-- Text -->
+            <TextView
+                android:id="@+id/tv_reading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reading"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="30dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_listening"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/gl_v50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_h50"
+        android:layout_marginBottom="170dp"
+        android:onClick="openListeningModule"
+        app:cardCornerRadius="20dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Image -->
+            <ImageView
+                android:id="@+id/iv_listening"
+                android:layout_width="170dp"
+                android:layout_height="130dp"
+                android:src="@drawable/listening_icon"
+                android:scaleType="center" />
+
+            <!-- Text -->
+            <TextView
+                android:id="@+id/tv_listening"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Listening"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="30dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
