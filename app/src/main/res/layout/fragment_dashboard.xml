@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/softBlue"
-    tools:context=".Dashboard">
+    tools:context=".DashboardFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_v50"
@@ -34,6 +34,7 @@
         app:layout_constraintBottom_toTopOf="@id/gl_h50"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="120dp"
+        android:onClick="openSpeakingModule"
         app:cardCornerRadius="20dp"
         android:clickable="true"
         android:focusable="true">
@@ -77,6 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="120dp"
+        android:onClick="openWritingModule"
         app:cardCornerRadius="20dp"
         android:clickable="true"
         android:focusable="true">
@@ -120,6 +122,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gl_h50"
         android:layout_marginBottom="170dp"
+        android:onClick="openReadingModule"
         app:cardCornerRadius="20dp"
         android:clickable="true"
         android:focusable="true">
@@ -163,6 +166,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gl_h50"
         android:layout_marginBottom="170dp"
+        android:onClick="openListeningModule"
         app:cardCornerRadius="20dp"
         android:clickable="true"
         android:focusable="true">
@@ -193,14 +197,5 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:onClick="logout"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_reading"
-        /
+
 </androidx.constraintlayout.widget.ConstraintLayout>

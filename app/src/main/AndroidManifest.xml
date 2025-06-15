@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         >
         <activity
+            android:name=".PrimaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".WritingAdvantageDisadvantageEssay"
             android:exported="false" />
         <activity
