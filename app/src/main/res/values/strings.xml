@@ -18,9 +18,14 @@
     <string name="questionNumber">Question 1</string>
     <string name="cueCard">Describe a hobby.</string>
     <string name="discussion">Advantages of internet.</string>
+    <string name="start_recording">Start Recording</string>
+    <string name="stop_recording">Stop Recording</string>
+    <string name="loading_question">Loading Question</string>
+    <string name="wait_for_question">Wait for Question</string>
     <string name="barGraphQuestion">Question...</string>
     <string name="lineChartQuestion">Question...</string>
     <string name="piechartQuestion">Question...</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">Logout</string>
 </resources>

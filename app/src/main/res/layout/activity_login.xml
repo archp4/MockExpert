@@ -75,7 +75,7 @@
             android:id="@+id/et_email1"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="Username"
             android:drawableStart="@drawable/ic_action_email"
             android:background="@drawable/edittext_border"
             android:textSize="20sp"

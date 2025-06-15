@@ -7,6 +7,8 @@ import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.group7.mockexpert.models.SharedPreferencesManager;
+
 public class Dashboard extends AppCompatActivity {
 
     @Override
@@ -17,7 +19,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void openSpeakingModule(View view) {
-        Intent intent = new Intent(Dashboard.this, LevelsPage.class);
+        Intent intent = new Intent(Dashboard.this, PartSelectionSpeaking.class);
         startActivity(intent);
     }
 
@@ -27,6 +29,13 @@ public class Dashboard extends AppCompatActivity {
 
     public void openReadingModule(View view) {
 
+    }
+
+    public void logout(View view){
+        if (SharedPreferencesManager.logout(this)){
+            Intent intent = new Intent(Dashboard.this, Login.class);
+            startActivity(intent);
+        }
     }
 
     public void openWritingModule(View view) {

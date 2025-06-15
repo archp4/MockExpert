@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.group7.mockexpert"
-        minSdk = 24
+        minSdk = 33
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.java.websocket)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -40,5 +40,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(libs.volley);
+    implementation(libs.volley)
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 }
