@@ -19,7 +19,7 @@ public class TaskOneResultApiService {
     }
 
     public static void submitTaskOne(Context context, String question, String answer, String imageUrl, ResultCallback callback) {
-        String url = "https://mock-expert-api.vercel.app/writing/resultTaskOne/";
+        String url = ApiConst.backendBaseUrl + "/writing/resultTaskOne/";
         answer = answer.trim();
         try {
             JSONObject requestData = new JSONObject();

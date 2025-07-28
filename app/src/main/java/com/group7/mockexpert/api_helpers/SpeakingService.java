@@ -33,7 +33,7 @@ import java.util.Map;
 public class SpeakingService {
     SpeakingAPIListener listener;
     SpeakingCompleteListener completeListener;
-    String mainURL = "https://mock-expert-api.vercel.app/speaking/";
+    String mainURL = ApiConst.backendBaseUrl + "/speaking/";
 
     public SpeakingService(SpeakingAPIListener listener){
         this.listener = listener;
@@ -169,7 +169,7 @@ public class SpeakingService {
 
     public void uploadViaWebSocket(Context context, Map<String, File> audioFiles, List<String> questions) {
         try {
-            URI uri = new URI("ws://10.0.0.102:8000/ws/uploadIntro");
+            URI uri = new URI(ApiConst.websocketURL +"/uploadIntro");
 
             WebSocketClient webSocketClient = new WebSocketClient(uri) {
                 @Override

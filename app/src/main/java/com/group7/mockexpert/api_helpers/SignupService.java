@@ -1,9 +1,8 @@
-package com.group7.mockexpert;
+package com.group7.mockexpert.api_helpers;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -17,11 +16,6 @@ import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
 
-interface SignUpListener {
-    void onSignUpSuccess();
-    void onSignUpError();
-}
-
 public class SignupService {
 
     private SignUpListener signUpListener;
@@ -32,7 +26,7 @@ public class SignupService {
 
     public void registerUser(String fullName, String email, String phone, String username, String password, Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://mock-expert-api.vercel.app/auth/register/";
+        String url = ApiConst.backendBaseUrl + "/auth/register/";
 
         JSONObject params = new JSONObject();
         try {

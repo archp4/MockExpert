@@ -13,20 +13,28 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SignUp2 extends AppCompatActivity {
+import com.group7.mockexpert.api_helpers.SignUpListener;
+import com.group7.mockexpert.api_helpers.SignupService;
+
+public class SignUp2 extends AppCompatActivity implements SignUpListener {
 
     private EditText etUsername, etPassword, etConfirmPassword;
     private CheckBox checkboxTerms;
+    private String fullName, email, phone, dob, gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup2);
-
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_pwd);
         etConfirmPassword = findViewById(R.id.et_confirmPwd);
         checkboxTerms = findViewById(R.id.check_box1);
+        Intent intent = getIntent();
+        fullName=intent.getStringExtra("fullName");
+        email= intent.getStringExtra("email");
+        phone= intent.getStringExtra("phone");
+        dob= intent.getStringExtra("dob");
     }
 
     private boolean validateFields() {
@@ -76,9 +84,22 @@ public class SignUp2 extends AppCompatActivity {
     }
 
     public void openDashboard(View view) {
+        String username = etUsername.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
         if (validateFields()) {
-            Intent intent = new Intent(this, Dashboard.class);
-            startActivity(intent);
+            SignupService signupService = new SignupService(this);
+            signupService.registerUser(fullName, email, phone, username, password, this);
         }
+    }
+
+    @Override
+    public void onSignUpSuccess() {
+        Intent intent = new Intent(this, Dashboard.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onSignUpError() {
+
     }
 }

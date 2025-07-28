@@ -1,15 +1,14 @@
-package com.group7.mockexpert;
+package com.group7.mockexpert.api_helpers;
 
 import android.content.Context;
 import android.widget.Toast;
-import com.android.volley.AuthFailureError;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.group7.mockexpert.models.SharedPreferencesManager;
 
@@ -17,18 +16,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 
-interface LoginListener{
-    void onLoginSuccessful();
-    void onLoginError();
-}
-
 public class LoginService {
 
     LoginListener loginListener;
 
-    void onLogin(String username, String password,Boolean isSave, Context context){
+    public LoginService(LoginListener listener){
+        this.loginListener = listener;
+    }
+
+    public void onLogin(String username, String password,Boolean isSave, Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "https://mock-expert-api.vercel.app/auth/login/";
+        String url = ApiConst.backendBaseUrl + "/auth/login/";
 
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url,null,
                 new Response.Listener<JSONObject>() {

@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation(libs.java.websocket)
+    implementation(libs.gson)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

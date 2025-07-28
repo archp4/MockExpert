@@ -18,7 +18,7 @@ public class TaskTwoResultApiService {
     }
 
     public static void submitTaskTwo(Context context, String question, String answer, ResultCallback callback) {
-        String url = "https://mock-expert-api.vercel.app/writing/resultTaskTwo/";
+        String url = ApiConst.backendBaseUrl + "/writing/resultTaskTwo/";
         answer = answer.trim();
         try {
             JSONObject json = new JSONObject();

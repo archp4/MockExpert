@@ -16,13 +16,6 @@ import com.group7.mockexpert.models.SharedPreferencesManager;
 
 import java.util.Arrays;
 
-// Make sure FragmentReadingQuestion is in the correct package.
-// If it's in the same package as Dashboard, no extra import needed.
-// If it's in a subpackage like 'fragments', then:
-// import com.group7.mockexpert.fragments.FragmentReadingQuestion;
-// Assuming it's in the same package for now based on your previous code snippet:
-// package com.group7.mockexpert; // FragmentReadingQuestion is also in this package
-
 
 public class Dashboard extends AppCompatActivity {
 
@@ -34,14 +27,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dashboard);
-
-        // Initialize the fragment container view
         fragmentContainer = findViewById(R.id.dashboard_fragment_container);
-
-        // Optional: If you want to load a default fragment on dashboard load, uncomment below
-        // if (savedInstanceState == null) {
-        //     // Example: loadReadingFragment();
-        // }
     }
 
     public void openSpeakingModule(View view) {
@@ -66,13 +52,14 @@ public class Dashboard extends AppCompatActivity {
 
     // Helper method to load the FragmentReadingQuestion
     private void loadReadingFragment() {
-        Fragment fragmentToLoad = new FragmentReadingMatching(); // directly load the matching fragment
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.dashboard_fragment_container, fragmentToLoad);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+//        Fragment fragmentToLoad = new FragmentReadingMatching(); // directly load the matching fragment
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.dashboard_fragment_container, fragmentToLoad);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+        Intent intent = new Intent(Dashboard.this, ReadingHomeActivity.class);
+        startActivity(intent);
     }
 
 
@@ -90,10 +77,6 @@ public class Dashboard extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /**
-     * Hides the main dashboard elements (module cards, logout button).
-     * This is called when a module fragment is loaded.
-     */
     private void hideDashboardElements() {
         findViewById(R.id.card_speaking).setVisibility(View.GONE);
         findViewById(R.id.card_writing).setVisibility(View.GONE);

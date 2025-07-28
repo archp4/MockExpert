@@ -44,6 +44,10 @@ public class SignUp extends AppCompatActivity {
     public void openNextPage(View view) {
         if (validateFields()) {
             Intent intent = new Intent(this, SignUp2.class);
+            intent.putExtra("fullName", etFullname.getText().toString());
+            intent.putExtra("email", etEmail.getText().toString());
+            intent.putExtra("phone", etPhone.getText().toString());
+            intent.putExtra("dob", etDOB.getText().toString());
             startActivity(intent);
         }
     }

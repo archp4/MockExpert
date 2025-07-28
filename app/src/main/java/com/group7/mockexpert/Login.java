@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.group7.mockexpert.api_helpers.LoginListener;
+import com.group7.mockexpert.api_helpers.LoginService;
 import com.group7.mockexpert.models.SharedPreferencesManager;
 
 public class Login extends AppCompatActivity implements LoginListener {
@@ -51,10 +53,8 @@ public class Login extends AppCompatActivity implements LoginListener {
             Toast.makeText(this, "Password is required.", Toast.LENGTH_SHORT).show();
             return;
         }
-        LoginService loginService = new LoginService();
-        loginService.loginListener = this;
-        loginService.onLogin(email,password,isSave,Login.this);
-
+        LoginService loginService = new LoginService(this);
+        loginService.onLogin(email,password,isSave,this);
     }
 
     public void openSignUpPage(View view) {
