@@ -20,6 +20,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     private Context context;
     private Map<String, List<Question>> questionMap;
 
+
+
+
     public QuestionAdapter(Context context, List<Question> questionList) {
         this.context = context;
         this.questionList = questionList;
@@ -53,6 +56,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             tvAnswerType = itemView.findViewById(R.id.tv_answer_type);
         }
     }
+
+
 
     public static Map<String, List<Question>> splitQuestionsByType(List<Question> questions) {
         Map<String, List<Question>> splitMap = new HashMap<>();

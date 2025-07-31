@@ -38,4 +38,9 @@
     <string name="question_number">Question 1</string>
     <string name="question_text">Question Text</string>
     <string name="your_answer">Your Answer</string>
+    <string name="false_">False</string>
+    <string name="true_">True</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="not_given">Not Given</string>
 </resources>

@@ -13,6 +13,15 @@ public class Question {
     private Map<String, String> headings_options;
     private List<String> choices;
 
+    private String userAnswer;
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
     public int getNumber() {
         return number;
     }
