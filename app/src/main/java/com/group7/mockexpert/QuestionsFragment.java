@@ -3,6 +3,7 @@ package com.group7.mockexpert;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,18 +13,26 @@ import android.view.ViewGroup;
 
 import com.group7.mockexpert.adapter.PassageQuestionAdapter;
 import com.group7.mockexpert.models.Question;
+import com.group7.mockexpert.viewmodel.ReadingTestViewModel;
 
 import java.util.List;
 
 
 public class QuestionsFragment extends Fragment {
 
+    private ReadingTestViewModel viewModel;
     List<Question> passageOneQuestions, passageTwoQuestions, passageThreeQuestions;
 
     public QuestionsFragment(List<Question> passageOneQuestions, List<Question> passageTwoQuestions, List<Question> passageThreeQuestions) {
         this.passageOneQuestions = passageOneQuestions;
         this.passageTwoQuestions = passageTwoQuestions;
         this.passageThreeQuestions = passageThreeQuestions;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(ReadingTestViewModel.class);
     }
 
     @Override

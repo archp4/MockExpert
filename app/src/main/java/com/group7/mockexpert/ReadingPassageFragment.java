@@ -18,6 +18,9 @@ public class ReadingPassageFragment extends Fragment {
     public ReadingPassageFragment(List<Passage> passageList) {
         this.passageList=passageList;
     }
+    public static ReadingPassageFragment newInstance(List<Passage> passageList) {
+        return new ReadingPassageFragment(passageList);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.group7.mockexpert.models.Question;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -32,6 +34,7 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final int TYPE_TRUE_FALSE = 3;
     private static final int TYPE_SHORT_ANSWER = 4;
     private final List<Question> questionList;
+    private String sentenceQuestion;
     private final Context context;
 
     public TypeQuestionAdapter(Context context, List<Question> questionList) {
@@ -57,9 +60,6 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case TYPE_TRUE_FALSE:
                 View trueFalseView = inflater.inflate(R.layout.item_question_true_false, parent, false);
                 return new TrueFalseViewHolder(trueFalseView);
-//            case TYPE_SHORT_ANSWER:
-//                View shortAnswerView = inflater.inflate(R.layout.item_question_short_answer, parent, false);
-//                return new ShortAnswerViewHolder(shortAnswerView);
             default:
                 View defaultView = inflater.inflate(R.layout.item_question_answer, parent, false);
                 return new QuestionViewHolder(defaultView);
@@ -83,11 +83,14 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case TYPE_TRUE_FALSE:
                 ((TrueFalseViewHolder) holder).bind(question);
                 break;
-//            case TYPE_SHORT_ANSWER:
-//                ((ShortAnswerViewHolder) holder).bind(question);
-//                break;
             default:
-                ((QuestionViewHolder) holder).bind(question);
+                if (sentenceQuestion == null) {
+                    ((QuestionViewHolder) holder).bind(question, false);
+                    sentenceQuestion = question.getQuestion();
+                }
+                else{
+                    ((QuestionViewHolder) holder).bind(question, true);
+                }
                 break;
         }
 
@@ -128,10 +131,27 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             etUserAnswer = itemView.findViewById(R.id.et_user_answer);
         }
 
-        public void bind(Question question) {
+        public void bind(Question question, boolean isRepeat) {
             tvQuestionNumber.setText("Question " + question.getNumber());
-            tvQuestionText.setText(question.getQuestion());
-//            etUserAnswer.setText(question.getUserAnswer() == null ? "" : question.getUserAnswer());
+            if (!isRepeat)
+                tvQuestionText.setText(question.getQuestion());
+            etUserAnswer.setText(question.getUserAnswer() == null ? "" : question.getUserAnswer());
+            etUserAnswer.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    question.setUserAnswer(s.toString().trim());
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
         }
     }
     static class MatchingHeadingsViewHolder extends RecyclerView.ViewHolder {
@@ -176,10 +196,10 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public SentenceCompletionViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvQuestionNumber = itemView.findViewById(R.id.tv_question_number);
-            tvQuestionText = itemView.findViewById(R.id.tv_question_text);
-            etUserAnswer = itemView.findViewById(R.id.et_user_answer);
-            tvWordLimit = itemView.findViewById(R.id.tv_word_limit);
+            tvQuestionNumber = itemView.findViewById(R.id.tv_question_number_sentence);
+            tvQuestionText = itemView.findViewById(R.id.tv_question_text_sentence);
+            etUserAnswer = itemView.findViewById(R.id.et_user_answer_sentence);
+            tvWordLimit = itemView.findViewById(R.id.tv_word_limit_sentence);
         }
 
         @SuppressLint("SetTextI18n")
@@ -188,7 +208,6 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tvQuestionText.setText(question.getQuestion());
             tvWordLimit.setText("Word limit: " + (question.getWord_limit() == null ? "N/A" : question.getWord_limit()));
             etUserAnswer.setText(question.getUserAnswer() == null ? "" : question.getUserAnswer());
-            etUserAnswer.setText(question.getUserAnswer() != null ? question.getUserAnswer() : "");
             etUserAnswer.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -205,7 +224,6 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
                 }
             });
-
         }
     }
 

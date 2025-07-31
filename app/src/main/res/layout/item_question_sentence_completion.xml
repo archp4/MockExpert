@@ -6,28 +6,27 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_question_number"
+        android:id="@+id/tv_question_number_sentence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/tv_question_text"
+        android:id="@+id/tv_question_text_sentence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"/>
 
     <EditText
-        android:id="@+id/et_user_answer"
+        android:id="@+id/et_user_answer_sentence"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:hint="@string/your_answer"
-        android:inputType="text"
-        android:importantForAutofill="no" />
+        />
 
     <TextView
-        android:id="@+id/tv_word_limit"
+        android:id="@+id/tv_word_limit_sentence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#888888"

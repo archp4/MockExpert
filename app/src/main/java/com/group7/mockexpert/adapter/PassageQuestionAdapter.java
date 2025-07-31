@@ -72,6 +72,7 @@ public class PassageQuestionAdapter extends RecyclerView.Adapter<PassageQuestion
             }
             splitMap.get(type).add(q);
         }
+        Log.d("splitMap", splitMap.toString());
         return splitMap;
     }
 }

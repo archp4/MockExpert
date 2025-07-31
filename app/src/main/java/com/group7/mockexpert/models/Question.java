@@ -7,13 +7,20 @@ public class Question {
     private int number;
     private String question;
     private List<String> options;
-    private Object answer; // Can be String or List<String>
+    private Object answer;
     private String type;
     private String word_limit;
     private Map<String, String> headings_options;
     private List<String> choices;
 
     private String userAnswer;
+
+
+    public boolean isCorrect(){
+        if (userAnswer == null)
+            return false;
+        return userAnswer.equals(answer);
+    }
     public String getUserAnswer() {
         return userAnswer;
     }
