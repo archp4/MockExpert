@@ -40,7 +40,7 @@ public class QuestionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_questions_fragement, container, false);
 
-        RecyclerView rvPassageQuestionOne = view.findViewById(R.id.rv_passage_question_list);
+        RecyclerView rvPassageQuestionOne = view.findViewById(R.id.rv_passage_question_list_one);
         RecyclerView rvPassageQuestionTwo = view.findViewById(R.id.rv_passage_question_list_two);
         RecyclerView rvPassageQuestionThree = view.findViewById(R.id.rv_passage_question_list_three);
 
