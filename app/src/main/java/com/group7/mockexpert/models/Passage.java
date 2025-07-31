@@ -23,5 +23,21 @@ public class Passage {
     public List<Question> getQuestions() {
         return questions;
     }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
 

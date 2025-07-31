@@ -8,12 +8,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.group7.mockexpert.R;
 import com.group7.mockexpert.models.Question;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
 
     private List<Question> questionList;
     private Context context;
+    private Map<String, List<Question>> questionMap;
 
     public QuestionAdapter(Context context, List<Question> questionList) {
         this.context = context;
@@ -47,6 +52,16 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             tvQuestionText = itemView.findViewById(R.id.tv_question_text);
             tvAnswerType = itemView.findViewById(R.id.tv_answer_type);
         }
+    }
+
+    public static Map<String, List<Question>> splitQuestionsByType(List<Question> questions) {
+        Map<String, List<Question>> splitMap = new HashMap<>();
+        for (Question q : questions) {
+            String type = q.getType();
+            splitMap.putIfAbsent(type, new ArrayList<>());
+            splitMap.get(type).add(q);
+        }
+        return splitMap;
     }
 }
 

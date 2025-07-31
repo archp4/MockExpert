@@ -14,20 +14,17 @@
 
         <TextView
             android:id="@+id/tv_passage_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Passage Title"
+            android:text="@string/passage_title"
             android:textStyle="bold"
             android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_passage_content"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Passage content goes here"
+            android:text="@string/passage_content_goes_here"
             android:layout_marginTop="8dp" />
-
-        <!-- You can later embed questions here or use a nested RecyclerView -->
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

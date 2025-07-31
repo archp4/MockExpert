@@ -51,6 +51,39 @@ public class Question {
         return List.of();
     }
 
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public void setOptions(List<String> options) {
+        this.options = options;
+    }
+
+    public void setAnswer(Object answer) {
+        this.answer = answer;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setWord_limit(String word_limit) {
+        this.word_limit = word_limit;
+    }
+
+    public void setHeadings_options(Map<String, String> headings_options) {
+        this.headings_options = headings_options;
+    }
+
+    public void setChoices(List<String> choices) {
+        this.choices = choices;
+    }
+
     public Object getAnswerRaw() {
         return answer;
     }
