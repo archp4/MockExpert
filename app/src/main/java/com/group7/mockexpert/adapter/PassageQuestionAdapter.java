@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,11 +25,13 @@ public class PassageQuestionAdapter extends RecyclerView.Adapter<PassageQuestion
     private final Map<String, List<Question>> passageQuestionsMap;
     private final List<String> questionTypes; // to preserve order
     private final Context context;
+    private Map<String, String> passageQuestionsTypeInstruction;
 
-    public PassageQuestionAdapter(Context context, List<Question> passageQuestionsList) {
+    public PassageQuestionAdapter(Context context, List<Question> passageQuestionsList, Map<String, String> passageQuestionsTypeInstruction) {
         this.context = context;
         this.passageQuestionsMap = splitQuestionsByType(passageQuestionsList);
         this.questionTypes = new ArrayList<>(passageQuestionsMap.keySet());
+        this.passageQuestionsTypeInstruction = passageQuestionsTypeInstruction;
     }
 
     @NonNull
@@ -42,11 +45,10 @@ public class PassageQuestionAdapter extends RecyclerView.Adapter<PassageQuestion
     public void onBindViewHolder(@NonNull PassageQuestionViewHolder holder, int position) {
         String type = questionTypes.get(position);
         List<Question> questions = passageQuestionsMap.get(type);
-
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
         holder.recyclerView.setNestedScrollingEnabled(false);
         holder.recyclerView.setAdapter(new TypeQuestionAdapter(context, questions));
-
+        holder.tvTypeInstruction.setText(passageQuestionsTypeInstruction.get(type));
     }
 
     @Override
@@ -56,10 +58,12 @@ public class PassageQuestionAdapter extends RecyclerView.Adapter<PassageQuestion
 
     public static class PassageQuestionViewHolder extends RecyclerView.ViewHolder {
         RecyclerView recyclerView;
+        TextView tvTypeInstruction;
 
         public PassageQuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.rv_passage_question);
+            tvTypeInstruction = itemView.findViewById(R.id.tv_type_instruction);
         }
     }
 
@@ -72,7 +76,6 @@ public class PassageQuestionAdapter extends RecyclerView.Adapter<PassageQuestion
             }
             splitMap.get(type).add(q);
         }
-        Log.d("splitMap", splitMap.toString());
         return splitMap;
     }
 }

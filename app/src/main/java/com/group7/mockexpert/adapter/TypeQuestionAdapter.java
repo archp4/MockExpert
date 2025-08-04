@@ -87,8 +87,10 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 if (sentenceQuestion == null) {
                     ((QuestionViewHolder) holder).bind(question, false);
                     sentenceQuestion = question.getQuestion();
-                }
-                else{
+                } else if (sentenceQuestion != question.getQuestion()){
+                    ((QuestionViewHolder) holder).bind(question, false);
+                    sentenceQuestion = question.getQuestion();
+                } else {
                     ((QuestionViewHolder) holder).bind(question, true);
                 }
                 break;
@@ -168,12 +170,23 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void bind(Question question) {
             tvQuestionNumber.setText("Question " + question.getNumber());
             tvQuestionText.setText(question.getQuestion());
+            List<String> headingValues = new ArrayList<>(question.getHeadings_options().values());
             ArrayAdapter<String> adapter = new ArrayAdapter<>(
                     itemView.getContext(),
                     android.R.layout.simple_spinner_item,
-                    new ArrayList<>(question.getHeadings_options().values()));
+                    new ArrayList<>(headingValues));
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerHeadings.setAdapter(adapter);
+            String userAnswer = question.getUserAnswer();
+            if (userAnswer != null) {
+                int selectedIndex = headingValues.indexOf(userAnswer);
+                if (selectedIndex >= 0) {
+                    spinnerHeadings.setSelection(selectedIndex);
+                }
+            } else {
+                spinnerHeadings.setSelection(0, false); // Or some default
+            }
+            spinnerHeadings.setOnItemSelectedListener(null);
             spinnerHeadings.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 @Override
@@ -244,11 +257,22 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tvQuestionText.setText(question.getQuestion());
             rgOptions.removeAllViews();
             List<String> options = question.getOptions();
+            String userAnswer = question.getUserAnswer();
+            int preselectId = -1;
             for (int i = 0; i < options.size(); i++) {
                 RadioButton rb = new RadioButton(itemView.getContext());
                 rb.setText(options.get(i));
                 rb.setId(i);
                 rgOptions.addView(rb);
+                if (userAnswer != null && userAnswer.equalsIgnoreCase(options.get(i))) {
+                    preselectId = i;
+                }
+            }
+            rgOptions.setOnCheckedChangeListener(null);
+            if (preselectId != -1) {
+                rgOptions.check(preselectId);
+            } else {
+                rgOptions.clearCheck();
             }
             rgOptions.setOnCheckedChangeListener((group, checkedId) -> {
                 RadioButton rbSelected = group.findViewById(checkedId);
@@ -275,8 +299,25 @@ public class TypeQuestionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void bind(Question question) {
             tvQuestionNumber.setText("Question " + question.getNumber());
             tvQuestionText.setText(question.getQuestion());
-            rgTrueFalse.setOnCheckedChangeListener((group, checkedId) -> {
-                RadioButton rbSelected = group.findViewById(checkedId);
+            String userAnswer = question.getUserAnswer();
+            rgTrueFalse.setOnCheckedChangeListener(null);
+            int checkedId = -1;
+            if (userAnswer != null) {
+                if (userAnswer.equalsIgnoreCase("True")) {
+                    checkedId = R.id.rb_true;
+                } else if (userAnswer.equalsIgnoreCase("False")) {
+                    checkedId = R.id.rb_false;
+                } else if (userAnswer.equalsIgnoreCase("Not Given")) {
+                    checkedId = R.id.rb_not_given;
+                }
+            }
+            if (checkedId != -1) {
+                rgTrueFalse.check(checkedId);
+            } else {
+                rgTrueFalse.clearCheck();
+            }
+            rgTrueFalse.setOnCheckedChangeListener((group, checkedIdListener) -> {
+                RadioButton rbSelected = group.findViewById(checkedIdListener);
                 if (rbSelected != null) {
                     question.setUserAnswer(rbSelected.getText().toString());
                 }

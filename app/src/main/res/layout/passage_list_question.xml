@@ -6,12 +6,12 @@
     android:padding="8dp">
 
     <!-- Optional: Add a type title here -->
-    <!-- <TextView
-        android:id="@+id/tv_type"
+     <TextView
+        android:id="@+id/tv_type_instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Type Header"
-        android:textStyle="bold"/> -->
+        android:text=""
+        android:textStyle="bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_passage_question"

@@ -16,17 +16,22 @@ import com.group7.mockexpert.models.Question;
 import com.group7.mockexpert.viewmodel.ReadingTestViewModel;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class QuestionsFragment extends Fragment {
 
     private ReadingTestViewModel viewModel;
     List<Question> passageOneQuestions, passageTwoQuestions, passageThreeQuestions;
+    Map<String, String> passageOneQuestionsTypeInstruction, passageTwoQuestionsTypeInstruction, passageThreeQuestionsTypeInstruction;
 
-    public QuestionsFragment(List<Question> passageOneQuestions, List<Question> passageTwoQuestions, List<Question> passageThreeQuestions) {
+    public QuestionsFragment(List<Question> passageOneQuestions, List<Question> passageTwoQuestions, List<Question> passageThreeQuestions, Map<String, String> passageOneQuestionsTypeInstruction,Map<String, String> passageTwoQuestionsTypeInstruction,Map<String, String> passageThreeQuestionsTypeInstruction) {
         this.passageOneQuestions = passageOneQuestions;
         this.passageTwoQuestions = passageTwoQuestions;
         this.passageThreeQuestions = passageThreeQuestions;
+        this.passageOneQuestionsTypeInstruction = passageOneQuestionsTypeInstruction;
+        this.passageTwoQuestionsTypeInstruction = passageTwoQuestionsTypeInstruction;
+        this.passageThreeQuestionsTypeInstruction = passageThreeQuestionsTypeInstruction;
     }
 
     @Override
@@ -45,15 +50,15 @@ public class QuestionsFragment extends Fragment {
         RecyclerView rvPassageQuestionThree = view.findViewById(R.id.rv_passage_question_list_three);
 
         rvPassageQuestionOne.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        rvPassageQuestionOne.setAdapter(new PassageQuestionAdapter(view.getContext(), passageOneQuestions));
+        rvPassageQuestionOne.setAdapter(new PassageQuestionAdapter(view.getContext(), passageOneQuestions, passageOneQuestionsTypeInstruction));
         rvPassageQuestionOne.setNestedScrollingEnabled(false);
 
         rvPassageQuestionTwo.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        rvPassageQuestionTwo.setAdapter(new PassageQuestionAdapter(view.getContext(), passageTwoQuestions));
+        rvPassageQuestionTwo.setAdapter(new PassageQuestionAdapter(view.getContext(), passageTwoQuestions, passageTwoQuestionsTypeInstruction));
         rvPassageQuestionTwo.setNestedScrollingEnabled(false);
 
         rvPassageQuestionThree.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        rvPassageQuestionThree.setAdapter(new PassageQuestionAdapter(view.getContext(), passageThreeQuestions));
+        rvPassageQuestionThree.setAdapter(new PassageQuestionAdapter(view.getContext(), passageThreeQuestions,passageOneQuestionsTypeInstruction));
         rvPassageQuestionThree.setNestedScrollingEnabled(false);
 
         return view;

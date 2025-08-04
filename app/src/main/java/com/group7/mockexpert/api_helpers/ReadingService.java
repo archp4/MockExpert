@@ -6,20 +6,13 @@ import android.content.Context;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.group7.mockexpert.models.Passage;
-import com.group7.mockexpert.models.Question;
-import com.group7.mockexpert.models.ReadingTest;
 import com.group7.mockexpert.models.ReadingTestResponse;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class ReadingService {
@@ -36,7 +29,7 @@ public class ReadingService {
             URI uri = new URI(WS_URL);
             webSocketClient = new WebSocketClient(uri) {
                 @Override
-                public void onOpen(ServerHandshake handshakedata) {
+                public void onOpen(ServerHandshake handShakeData) {
                     Log.d("WebSocket", "Connection opened");
 
                     // Send reading request
@@ -53,56 +46,7 @@ public class ReadingService {
                 public void onMessage(String message) {
                     Log.d("WebSocket", "Received: " + message);
                     try {
-//                        JSONObject root = new JSONObject(message);
-//                        String readingTestStr = root.getString("reading_test");
-//                        JSONObject readingTest = new JSONObject(readingTestStr);
                         List<Passage> passageList = new ArrayList<>();
-//                        for (int i = 1; i <= readingTest.length(); i++) {
-//                            JSONObject passageJson = readingTest.getJSONObject("passage_" + i);
-//                            String title = passageJson.getString("title");
-//                            String context = passageJson.getString("context");
-//                            String text = passageJson.getString("text");
-//                            JSONArray questionsArray = passageJson.getJSONArray("questions");
-//                            List<Question> questionList = new ArrayList<>();
-//                            for (int j = 0; j < questionsArray.length(); j++) {
-//                                JSONObject q = questionsArray.getJSONObject(j);
-//                                Question question = new Question();
-//                                question.setNumber(q.getInt("number"));
-//                                question.setQuestion(q.getString("question"));
-//                                question.setAnswer(q.getString("answer"));
-//                                question.setType(q.getString("type"));
-//                                if (q.has("word_limit")) {
-//                                    question.setWord_limit(q.getString("word_limit"));
-//                                }
-//                                if (q.has("options")) {
-//                                    JSONArray optionsArray = q.getJSONArray("options");
-//                                    List<String> options = new ArrayList<>();
-//                                    for (int k = 0; k < optionsArray.length(); k++) {
-//                                        options.add(optionsArray.getString(k));
-//                                    }
-//                                    question.setOptions(options);
-//                                }
-//
-//                                if (q.has("headings_options")) {
-//                                    JSONObject headingObj = q.getJSONObject("headings_options");
-//                                    Map<String, String> headingMap = new HashMap<>();
-//                                    Iterator<String> keys = headingObj.keys();
-//                                    while (keys.hasNext()) {
-//                                        String key = keys.next();
-//                                        headingMap.put(key, headingObj.getString(key));
-//                                    }
-//                                    question.setHeadings_options(headingMap);
-//                                }
-//
-//                                questionList.add(question);
-//                            }
-//                            Passage passage = new Passage();
-//                            passage.setTitle(title);
-//                            passage.setContext(context);
-//                            passage.setText(text);
-//                            passage.setQuestions(questionList);
-//                            passageList.add(passage);
-//                        }
                         Gson gson = new Gson();
                         ReadingTestResponse response = gson.fromJson(message, ReadingTestResponse.class);
                         passageList.add(response.getReading_test().getPassage_1());
@@ -132,12 +76,7 @@ public class ReadingService {
                 public void onError(Exception ex) {
                     Log.e("WebSocket", "Error: " + ex.getMessage());
                     if (context instanceof Activity){
-                        ((Activity) context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                listener.onError("Error: " + ex.getMessage());
-                            }
-                        });
+                        ((Activity) context).runOnUiThread(() -> listener.onError("Error: " + ex.getMessage()));
                     }
                 }
             };

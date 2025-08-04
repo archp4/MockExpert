@@ -26,6 +26,7 @@ import com.group7.mockexpert.viewmodel.ReadingTestViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class ReadingHomeActivity extends AppCompatActivity implements ReadingListener {
@@ -66,10 +67,14 @@ public class ReadingHomeActivity extends AppCompatActivity implements ReadingLis
         for (Passage passage : passages) {
             questionList.add(passage.getQuestions());
         }
+        List<Map<String, String>> typeInstructionList = new ArrayList<Map<String, String>>();
+        for (Passage passage : passages) {
+            typeInstructionList.add(passage.getInstrument());
+        }
         if (!passages.isEmpty()) {
             try {
                 passageFragment = new ReadingPassageFragment(passages);
-                questionsFragment = new QuestionsFragment(questionList.get(0), questionList.get(1), questionList.get(2));
+                questionsFragment = new QuestionsFragment(questionList.get(0), questionList.get(1), questionList.get(2),typeInstructionList.get(0),typeInstructionList.get(1),typeInstructionList.get(2));
             } catch (Exception e) {
                 Log.e("Create Fragment", Objects.requireNonNull(e.getMessage()));
             }

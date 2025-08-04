@@ -1,5 +1,6 @@
 package com.group7.mockexpert.models;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Passage {
@@ -7,6 +8,15 @@ public class Passage {
     private String context;
     private String text;
     private List<Question> questions;
+    private HashMap<String, String> instrument;
+
+    public HashMap<String, String> getInstrument() {
+        return instrument;
+    }
+
+    public void setInstrument(HashMap<String, String> instrument) {
+        this.instrument = instrument;
+    }
 
     public String getTitle() {
         return title;
