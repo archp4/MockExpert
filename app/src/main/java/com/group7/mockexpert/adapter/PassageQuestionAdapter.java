@@ -48,7 +48,7 @@ public class PassageQuestionAdapter extends RecyclerView.Adapter<PassageQuestion
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
         holder.recyclerView.setNestedScrollingEnabled(false);
         holder.recyclerView.setAdapter(new TypeQuestionAdapter(context, questions));
-        holder.tvTypeInstruction.setText(passageQuestionsTypeInstruction.get(type));
+        holder.tvTypeInstruction.setText(type);
     }
 
     @Override
