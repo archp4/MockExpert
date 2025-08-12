@@ -8,4 +8,6 @@
     <color name="softBlue">#a5c2e9</color>
     <color name="edittext_text_color">#1D1D1D</color>
     <color name="edittext_hint_color">#434343</color>
+    <color name="navBlue">#36CEE9</color>
+    <color name="nav">#42D7F0</color>
 </resources>
