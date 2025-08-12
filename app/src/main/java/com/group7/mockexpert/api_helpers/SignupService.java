@@ -26,7 +26,7 @@ public class SignupService {
 
     public void registerUser(String fullName, String email, String phone, String username, String password, Context context) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = ApiConst.backendBaseUrl + "/auth/register/";
+        String url = "https://mock-expert-api.vercel.app/auth/register/";
 
         JSONObject params = new JSONObject();
         try {

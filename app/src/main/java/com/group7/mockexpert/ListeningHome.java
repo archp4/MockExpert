@@ -98,7 +98,7 @@ public class ListeningHome extends AppCompatActivity implements ListeningListene
         this.sectionList=sectionList;
         int temp = 1;
         for (Section section : sectionList) {
-            ListeningSectionFragment fragment = new ListeningSectionFragment(section, String.valueOf(temp++));
+            ListeningSectionFragment fragment = new ListeningSectionFragment(section, String.valueOf(temp));
             sectionFragments.add(fragment);
             temp++;
         }

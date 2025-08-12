@@ -23,9 +23,10 @@ public class ReadingTestViewModel extends ViewModel {
         if (passagesLiveData.getValue() != null){
             for (Passage passage : passagesLiveData.getValue()) {
                 for (Question q : passage.getQuestions()) {
-                    if(q.getUserAnswer() == null) {
-                        throw new Exception("Question " + q.getNumber() + " has no selected answer");
-                    } else if (q.isCorrect()) {
+//                    if(q.getUserAnswer() == null) {
+//                        throw new Exception("Question " + q.getNumber() + " has no selected answer");
+//                    } else
+                    if (q.isCorrect()) {
                         score++;
                     }
                 }
