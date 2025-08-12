@@ -19,7 +19,7 @@ public class QuestionTaskTwoService {
 
     public static void fetchQuestion(Context context, int questionPart, QuestionCallback callback) {
         int difficultyLevel = 1;
-        String url = ApiConst.backendBaseUrl + "/writing/questionTaskTwo?questionPart=" + questionPart + "&difficultLevel=" + difficultyLevel;
+        String url = "https://mock-expert-api.vercel.app/writing/questionTaskTwo?questionPart=" + questionPart + "&difficultLevel=" + difficultyLevel;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {

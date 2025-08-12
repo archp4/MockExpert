@@ -17,7 +17,7 @@ public class QuestionApiService {
     }
 
     public static void fetchQuestion(Context context, int questionType, QuestionCallback callback) {
-        String url = ApiConst.backendBaseUrl + "/writing/questionTaskOne?questionType=" + questionType;
+        String url = "https://mock-expert-api.vercel.app/writing/questionTaskOne?questionType=" + questionType;
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
