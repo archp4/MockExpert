@@ -43,4 +43,10 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="not_given">Not Given</string>
+    <string name="check_result">Check Result</string>
+    <string name="play_audio">Play Audio</string>
+    <string name="section_number">Section Number</string>
+    <string name="next_section">next_section</string>
+    <string name="previous_section">Previous Section</string>
+    <string name="section_context">Section Context</string>
 </resources>

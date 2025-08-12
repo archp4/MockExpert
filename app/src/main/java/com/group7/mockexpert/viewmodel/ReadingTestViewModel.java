@@ -18,12 +18,14 @@ public class ReadingTestViewModel extends ViewModel {
         passagesLiveData.setValue(passages);
     }
 
-    public int calculateScore() {
+    public int calculateScore() throws Exception {
         int score = 0;
         if (passagesLiveData.getValue() != null){
             for (Passage passage : passagesLiveData.getValue()) {
                 for (Question q : passage.getQuestions()) {
-                    if (q.isCorrect()) {
+                    if(q.getUserAnswer() == null) {
+                        throw new Exception("Question " + q.getNumber() + " has no selected answer");
+                    } else if (q.isCorrect()) {
                         score++;
                     }
                 }

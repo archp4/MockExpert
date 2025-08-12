@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ReadingHomeActivity">
+    android:layout_height="match_parent"
+    tools:context=".ListeningHome">
 
-    <LinearLayout
-        style="?android:attr/buttonBarStyle"
+
+    <LinearLayout style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -19,21 +19,20 @@
             android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/view_passage"
+            android:id="@+id/next_section"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/view_question"
-            android:text="@string/view_passage"
-            android:onClick="viewPassage" />
+            android:text="@string/next_section"
+            />
 
         <Button
             style="?android:attr/buttonBarButtonStyle"
             android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/view_question"
-            android:text="@string/view_question"
-            android:onClick="viewQuestion"
+            android:id="@+id/previous_section"
+            android:text="@string/previous_section"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/view_passage"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,13 +41,16 @@
             android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/result_button"
+            android:id="@+id/section_result_button"
             android:text="@string/check_result"
             />
+
+
+
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/readingFragmentHolder"
+        android:id="@+id/section_fragment_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -56,10 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/loading_data"
-            android:id="@+id/textviewLoading" />
+            android:id="@+id/section_loading_textview"
+            />
 
     </FrameLayout>
-
 </LinearLayout>
-
-

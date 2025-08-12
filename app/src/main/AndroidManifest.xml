@@ -18,6 +18,9 @@
         android:theme="@style/Theme.MockExpert"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ListeningHome"
+            android:exported="false" />
+        <activity
             android:name=".ReadingHomeActivity"
             android:exported="false" />
         <activity

@@ -36,17 +36,12 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void openListeningModule(View view) {
-        Toast.makeText(this, "Listening Module Clicked!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(Dashboard.this, ListeningHome.class);
+        startActivity(intent);
     }
 
     // This method is called when the "Reading" CardView is clicked (android:onClick="openReadingModule")
     public void openReadingModule(View view) {
-        // Hide the main dashboard elements (cards, logout button)
-        hideDashboardElements();
-        // Make the fragment container visible
-        fragmentContainer.setVisibility(View.VISIBLE);
-
-        // Load the Reading Fragment into the container
         loadReadingFragment();
     }
 
@@ -78,11 +73,11 @@ public class Dashboard extends AppCompatActivity {
     }
 
     private void hideDashboardElements() {
-        findViewById(R.id.card_speaking).setVisibility(View.GONE);
-        findViewById(R.id.card_writing).setVisibility(View.GONE);
-        findViewById(R.id.card_reading).setVisibility(View.GONE);
-        findViewById(R.id.card_listening).setVisibility(View.GONE);
-        findViewById(R.id.btn_logout).setVisibility(View.GONE);
+//        findViewById(R.id.card_speaking).setVisibility(View.GONE);
+//        findViewById(R.id.card_writing).setVisibility(View.GONE);
+//        findViewById(R.id.card_reading).setVisibility(View.GONE);
+//        findViewById(R.id.card_listening).setVisibility(View.GONE);
+//        findViewById(R.id.btn_logout).setVisibility(View.GONE);
         // Add any other elements you want to hide when a fragment is active
     }
 

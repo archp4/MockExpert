@@ -3,6 +3,7 @@ package com.group7.mockexpert;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class ReadingHomeActivity extends AppCompatActivity implements ReadingLis
     private ReadingPassageFragment passageFragment;
     private QuestionsFragment questionsFragment;
     private ReadingTestViewModel viewModel;
+    private Button resultButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class ReadingHomeActivity extends AppCompatActivity implements ReadingLis
             return insets;
         });
         textView=findViewById(R.id.textviewLoading);
+        resultButton=findViewById(R.id.result_button);
         viewModel = new ViewModelProvider(this).get(ReadingTestViewModel.class);
         viewModel.getPassagesLiveData().observe(this, passages -> {
             if (passages != null) {
@@ -57,7 +60,10 @@ public class ReadingHomeActivity extends AppCompatActivity implements ReadingLis
             ReadingService service = new ReadingService(this);
             service.connectAndRequestReadingTest(this);
         }
-
+        resultButton.setOnClickListener((view)->{
+           getScore();
+        });
+        resultButton.setEnabled(false);
     }
 
 
@@ -87,14 +93,19 @@ public class ReadingHomeActivity extends AppCompatActivity implements ReadingLis
     }
 
     private void getScore(){
-        int score = viewModel.calculateScore();
-        Toast.makeText(this, "Your score is " + score, Toast.LENGTH_SHORT).show();
+       try{
+           int score = viewModel.calculateScore();
+           Toast.makeText(this, "Your score is " + score, Toast.LENGTH_SHORT).show();
+       } catch (Exception e) {
+           Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+       }
     }
 
     @Override
     public void onReceive(List<Passage> passageList) {
         textView.setVisibility(View.GONE);
         viewModel.setPassages(passageList);
+        resultButton.setEnabled(true);
     }
 
     @Override
